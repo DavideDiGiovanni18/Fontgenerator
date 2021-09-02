@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="font.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Faster+One&family=Indie+Flower&family=Qahiri&display=swap" rel="stylesheet">
+    <title>Schriftgenerator</title>
+  </head>
+  <body onload="datum()">
+      <h1>Fancy Text generator</h1>
+
+    <div class="inputField">
+
+    <label for="inputSchrift" id="label">Eingabe</label>
+    <input type="text" name="" id="inputbox" class="eins"oninput="schrift()" placeholder="Your Text">
+    </div>
+
+     <br>
+     <table>
+       <tr>
+         <td>Bold:</td>
+         <td><textarea id="bold" rows="4" cols="20" placeholder=""readonly></textarea> </td>
+       </tr>
+       <tr>
+         <td>Squares:</td>
+         <td><textarea id="squares" rows="4" cols="20" readonly></textarea></td>
+       </tr>
+       <tr>
+         <td>DoubleStruck</td>
+         <td><textarea id="doubleStruck" rows="4" cols="20" readonly></textarea></td>
+       </tr>
+       <tr>
+         <td>Medieval:</td>
+         <td><textarea  id="medieval" rows="4" cols="20" readonly></textarea></td>
+       </tr>
+       <tr>
+         <td>Neon:</td>
+         <td><textarea id="neon" rows="4" cols="20" readonly></textarea></td>
+       </tr>
+       <tr>
+         <td>Squiggle4:</td>
+         <td><textarea id="squiggle4" rows="4" cols="20" readonly></textarea></td>
+       </tr>
+      </table>
+<br>
+<br>
+<footer>
+  <div class="time">
+      <span id="time"></span>
+  </div>
+  <div class="date">
+    <span id="date"></span>
+  </div>
+</footer>
+
+<script type="text/javascript" src="data.js">
+</script>
+<script type="text/javascript">
+//Fehler momentan: Medvial&Squares font löschen zwei zahlen beim löschen von einer && beim wählen und löschen ->
+//meherer buchstaben wird nur 1 gelöscht.
+
+var deleteChar;//variable um beim Löschen eines Char die fonttexte zu aktualisiern (length-1())
+var bold=squares=doubleStruck=medieval=neon=squiggle4="";
+//variablen für die texte der verschiedenen Fonts
+
+function schrift(){
+var ids =["bold","squares","doubleStruck","medieval","neon","squiggle4"];
+var valueInput =document.getElementById("inputbox").value;//getValue von Input
+var value = valueInput[valueInput.length-1];//nur die letzte stelle der eingabe
+
+if(boldMap[value] !=undefined){//falls ein char wie % eingeben wird, da nicht in der Map(data.js) vorhanden ist oder ->
+  //leerer Char(z.B wenn der String länge 0 hat =undefined
+  if(deleteChar>valueInput.length){//falls sich die länge des Textes minimiert wird, wird der String der Font kleiner
+    deleteCharacter();
+    neon = neon.substring(0,neon.length-1);
+    squiggle4 = squiggle4.substring(0,squiggle4.length-1);
+
+  document.getElementById(ids[0]).innerHTML =bold;
+  document.getElementById(ids[1]).innerHTML =squares;
+  document.getElementById(ids[2]).innerHTML =doubleStruck ;
+  document.getElementById(ids[3]).innerHTML =medieval;
+  document.getElementById(ids[4]).innerHTML =neon;
+  document.getElementById(ids[5]).innerHTML =squiggle4;
+
+}else {//buchstaben mit font zum String der Font adden
+document.getElementById(ids[0]).innerHTML= bold+boldMap[value];
+document.getElementById(ids[1]).innerHTML= squares+squaresMap[value];
+document.getElementById(ids[2]).innerHTML= doubleStruck+doubleStruckMap[value];
+document.getElementById(ids[3]).innerHTML= medieval+medievalMap[value];
+document.getElementById(ids[4]).innerHTML= neon+neonMap[value];
+document.getElementById(ids[5]).innerHTML= squiggle4+squiggle4Map[value];
+
+bold+=boldMap[value];
+squares+=squaresMap[value];
+doubleStruck+=doubleStruckMap[value];//Neuer String speichern
+medieval+=medievalMap[value];
+neon+=neonMap[value];
+squiggle4+=squiggle4Map[value];
+}
+
+}else {
+  if(valueInput.length ==0){//falls der InputString leer ist am Schluss
+     bold ="";
+     doubleStruck ="";
+     squares ="";
+     medieval="";
+     neon ="";
+     squiggle4 ="";
+     value="";
+  }
+  if(deleteChar>valueInput.length){
+  deleteCharacter();
+  neon = neon.substring(0,neon.length-2);
+  squiggle4 = squiggle4.substring(0,squiggle4.length-2);
+  }
+  //adden für die nicht vorhandenen char in der Map
+  document.getElementById(ids[0]).innerHTML= bold+value;
+  document.getElementById(ids[1]).innerHTML= squares+value;
+  document.getElementById(ids[2]).innerHTML= doubleStruck+value;
+  document.getElementById(ids[3]).innerHTML= medieval+value;
+  document.getElementById(ids[4]).innerHTML =neon+value;
+  document.getElementById(ids[5]).innerHTML =squiggle4+value;
+
+  bold+=value;
+  squares+=value;
+  doubleStruck+=value;
+  medieval+=value;
+  neon+=value;
+  squiggle4+=value;
+}
+
+deleteChar= valueInput.length;//speichert Länge für den Vergleich
+}
+
+
+function deleteCharacter() {
+  bold =  bold.substring(0,bold.length-2);//Minus zwei, da ein Buchstabe dieses Font zwei Längen gross ist(buchtstaben)
+  squares =squares.substring(0,squares.length-2);
+  doubleStruck = doubleStruck.substring(0,doubleStruck.length-2);//entfern der letzte buchstabe
+  medieval= medieval.substring(0,medieval.length-2);
+}
+
+setInterval(zeit,10);
+function zeit(){
+  var datum= new Date();
+  document.getElementById('time').innerHTML = datum.toLocaleTimeString();
+}
+function datum(){
+  var datum= new Date();
+  document.getElementById('date').innerHTML =datum.getDate()+"."+(datum.getMonth()+1)+"."+datum.getFullYear();
+}
+    </script>
+  </body>
+</html>

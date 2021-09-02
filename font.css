@@ -1,0 +1,106 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  width: 99%;
+  background-color: black;
+  background-image: url("giphy.gif");
+  color: white;
+  font-size: 20px;
+  background-size: cover;
+}
+
+h1{
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  border: 5px solid black;
+  background-color:#6633FF;
+}
+
+.inputField{
+  font-size: 25px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#label{
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+#inputbox{
+width: 450px;
+height: 55px;
+}
+
+textarea{
+  resize: none;
+  width: 300px;
+  height: 50px;
+}
+
+table{
+  margin: auto;
+}
+table td{
+  padding-right: 5px;
+  padding-bottom: 5px;
+  font-size: 25px;
+}
+
+footer{
+  border-top: 2px solid white;
+  background-color: black;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 60px;
+}
+
+.time{
+  float: left;
+  padding: 10px;
+}
+.date{
+  float: right;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 500px) {
+h1{
+  font-size: 36px;
+}
+
+  body{
+    width: 95.8%;
+  }
+
+
+table{
+  padding-bottom: 20px;
+  padding-left: 18px;
+}
+
+#inputbox{
+width: 300px;
+height: 50px;
+}
+
+#label{
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+textarea{
+  overflow: scroll;
+  resize: none;
+  width: 200px;
+  height: 60px;
+}
+
+}
